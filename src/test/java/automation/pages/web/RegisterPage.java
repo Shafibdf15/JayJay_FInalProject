@@ -27,7 +27,7 @@ public class RegisterPage {
     }
 
     public void fillRandomUsernameAndPassword() {
-        int randomNumber = new Random().nextInt(15); // random 0-15
+        int randomNumber = new Random().nextInt(100); // random 0-15
         newUser = "TestAccount" + randomNumber;
         newUserPass = "DemoTest" + randomNumber;
 

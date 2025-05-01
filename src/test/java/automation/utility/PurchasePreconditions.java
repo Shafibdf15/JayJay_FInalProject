@@ -39,7 +39,6 @@ public class PurchasePreconditions {
     // Add to cart flow
     public void addProductToCart() {
         homePage.getProduct();
-        productPage.getProductPage();
         productPage.addtoCart();
     }
 

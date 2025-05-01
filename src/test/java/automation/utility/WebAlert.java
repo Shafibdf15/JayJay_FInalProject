@@ -77,7 +77,7 @@ public class WebAlert {
             wait.until(ExpectedConditions.alertIsPresent());
             Alert alert = driver.switchTo().alert();  // Switch to the alert
             String alertText = alert.getText();  // Get alert text
-            Assert.assertEquals("Product added", alertText);  // Verify message
+            Assert.assertEquals("Product added.", alertText);  // Verify message
             alert.accept();  // Click "OK"
         } catch (NoAlertPresentException e) {
             Assert.fail("No messages shown");  // Fails the test if no alert

@@ -42,7 +42,7 @@ public class CartPage {
     //Getting User Cart
     public void cartData(){
 
-        driver.findElement(cartNav).click();
+        wait.until(ExpectedConditions.elementToBeClickable(cartNav)).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(cartData));
 
     }
