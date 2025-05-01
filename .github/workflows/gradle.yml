@@ -26,10 +26,10 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Web Tests
-        run: ./gradlew runCucumberTests -Dcucumber.filter.tags="@web"
+        run: ./gradlew runWebTests -Dcucumber.filter.tags="@web"
 
       - name:  Run API Tests
-        run: ./gradlew runCucumberTests -Dcucumber.filter.tags="@api"
+        run: ./gradlew runApiTests -Dcucumber.filter.tags="@api"
 
       - name: Upload Web Test Report
         uses: actions/upload-artifact@v4
