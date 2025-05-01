@@ -75,11 +75,11 @@ public class ApiPage {
             List<Object> picture = response.jsonPath().getList("data.picture");
 
             //Assert response as expected
-            assertThat(id.getFirst()).isNotNull();
-            assertThat(title.getFirst()).isNotNull();
-            assertThat(firstName.getFirst()).isNotNull();
-            assertThat(lastName.getFirst()).isNotNull();
-            assertThat(picture.getFirst()).isNotNull();
+            assertThat(id.get(0)).isNotNull();
+            assertThat(title.get(0)).isNotNull();
+            assertThat(firstName.get(0)).isNotNull();
+            assertThat(lastName.get(0)).isNotNull();
+            assertThat(picture.get(0)).isNotNull();
 
             System.out.println("✅ Response contains all required user information.");
         } catch (Exception e) {
