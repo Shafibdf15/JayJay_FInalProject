@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //Web Automation Dependencies
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.30.0'
+    testImplementation("io.github.bonigarcia:webdrivermanager:6.0.0")
+    testImplementation 'io.cucumber:cucumber-java:7.8.1'
+    testImplementation 'io.cucumber:cucumber-junit:7.8.1'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    //API automation Dependencies
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+    testImplementation group: 'org.json', name: 'json', version: '20231013'
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation group: 'io.rest-assured', name: 'json-schema-validator', version: '5.3.0'
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
+
+def tags = (findProperty('tags') == null) ? 'not @exclude' : findProperty('tags') + ' and not @exclude'
+
+task runApiTests(type: JavaExec) {
+    group = 'verification'
+    description = 'Run Cucumber tests for API'
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    mainClass.set("io.cucumber.core.cli.Main")
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:reports/api_report.html',
+            '--plugin', 'json:reports/api_report.json',
+            '--glue', 'automation.stepdef.api',
+            'src/test/resources/features/api',
+            '--tags', '@api'
+    ]
+}
+
+task runWebTests(type: JavaExec) {
+    group = 'verification'
+    description = 'Run Cucumber tests for Web'
+    classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+    mainClass.set("io.cucumber.core.cli.Main")
+    args = [
+            '--plugin', 'pretty',
+            '--plugin', 'html:reports/web_report.html',
+            '--plugin', 'json:reports/web_report.json',
+            '--glue', 'automation.stepdef.web',
+            'src/test/resources/features/web',
+            '--tags', '@web'
+    ]
+}
