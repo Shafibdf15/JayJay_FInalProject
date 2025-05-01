@@ -44,7 +44,7 @@ task runApiTests(type: JavaExec) {
             '--plugin', 'json:reports/api_report.json',
             '--glue', 'automation.stepdef.api',
             'src/test/resources/features/api',
-            '--tags', '@api'
+            '--tags', tags
     ]
 }
 
@@ -59,6 +59,6 @@ task runWebTests(type: JavaExec) {
             '--plugin', 'json:reports/web_report.json',
             '--glue', 'automation.stepdef.web',
             'src/test/resources/features/web',
-            '--tags', '@web'
+            '--tags', tags
     ]
 }
